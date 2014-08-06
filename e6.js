@@ -6,11 +6,9 @@ module.exports = function(dir, ext, callback){
 		if(err){
 			return callback(err);
 		}
-		var arr = [];
-		list.forEach(function(filename){
-			if(path.extname(filename) === "." + ext)
-				arr.push(filename);
+		list = list.filter(function(filename){
+			return (path.extname(filename) === "." + ext)
 		});
-		callback(null, arr);
+		callback(null, list);
 	});
 };
