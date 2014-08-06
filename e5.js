@@ -8,14 +8,10 @@ fs.readdir(dir, function(err, list){
 		console.log(err.stacktrace);
 		return;
 	}
-	var arr = [];
-	for(var i = 0; i < list.length; i++){
-		var fileext = path.extname(list[i]);
+	list.forEach(function(file){
+		var fileext = path.extname(file);
 		if(fileext === "." + ext){
-			arr.push(list[i]);
-			console.log(list[i]);
+			console.log(file);
 		}
-	}
-
-//	console.log(arr);
+	});
 });
