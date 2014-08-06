@@ -1,15 +1,13 @@
 var http = require('http');
+var map = require('through2-map');
 
 var server = http.createServer(function(request, response){
-	request.setEncoding("utf8");
-	var  body = "";
-	request.on("data", function(trunk){
-		body += trunk;
-	});
-	request.on("end", function(){
-		response.write(body.toUpperCase());
-		response.end();
-	});
+	if(request.method != 'POST')
+		return response.end("send me a POST\n");
+	
+	request.pipe(map(function(chunk){
+		return chunk.toString().toUpperCase();	
+	})).pipe(response);
 });
 
 server.listen(+process.argv[2]);
