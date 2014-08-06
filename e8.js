@@ -1,16 +1,11 @@
 var http = require('http');
+var bl = require('bl');
 
 http.get(process.argv[2], function(response){
-	var buf = "";
-	response.setEncoding("utf8");
-	response.on("data", function(data){
-		buf += data;
-//		console.log(buf.toString());
-	});
-	response.on("error", console.error);
-	response.on("end", function(err, data){
-		console.log(buf.length);
-		console.log(buf.toString());
-	});
-
+	response.pipe(bl(function(err, data){
+		if(err)
+			return console.error(err);
+		console.log(data.length);
+		console.log(data.toString());
+	}));
 });
