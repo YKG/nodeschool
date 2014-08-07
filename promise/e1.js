@@ -3,5 +3,5 @@ var defer = q.defer();
 var promise = defer.promise;
 
 promise.then(console.log);
-setTimeout(defer.resolve("RESOLVED!"), 300);
+setTimeout(defer.resolve, 300, "RESOLVED!");
 
