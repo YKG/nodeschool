@@ -26,5 +26,6 @@ q.fcall(iterate, 1)
 .then(iterate)
 .then(iterate)
 .then(iterate)
-.then(null, console.log)
+.then(null, console.log
+)
 ;
