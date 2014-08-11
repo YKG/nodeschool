@@ -2,7 +2,7 @@ var trumpet = require('trumpet');
 var through = require('through');
 
 var tr = trumpet();
-process.stdin.pipe(tr);
+process.stdin.pipe(tr).pipe(process.stdout);
 
 var stream = tr.select('.loud').createStream();
 stream.pipe(through(function(buf){
@@ -11,4 +11,3 @@ stream.pipe(through(function(buf){
 	this.queue(null);
 }).pipe(stream);
 
-tr.pipe(process.stdout);
